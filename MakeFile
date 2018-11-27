@@ -1,3 +1,7 @@
 install:
 	composer install
 	php bin/console doctrine:database:create
+
+run:
+	docker-compose up --build
+	php bin/console server:run
