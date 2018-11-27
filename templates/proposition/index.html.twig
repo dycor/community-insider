@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Proposition index{% endblock %}
+
+{% block body %}
+    <h1>Proposition index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Status</th>
+                <th>Type</th>
+                <th>Progression</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for proposition in propositions %}
+            <tr>
+                <td>{{ proposition.id }}</td>
+                <td>{{ proposition.title }}</td>
+                <td>{{ proposition.description }}</td>
+                <td>{{ proposition.status }}</td>
+                <td>{{ proposition.type }}</td>
+                <td>{{ proposition.progression }}</td>
+                <td>
+                    <a href="{{ path('proposition_show', {'id': proposition.id}) }}">show</a>
+                    <a href="{{ path('proposition_edit', {'id': proposition.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('proposition_new') }}">Create new</a>
+{% endblock %}
