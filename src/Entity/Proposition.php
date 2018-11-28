@@ -3,12 +3,15 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\Traits\TimestampableTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PropositionRepository")
  */
 class Proposition
 {
+    use TimestampableTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -18,26 +21,31 @@ class Proposition
 
     /**
      * @ORM\Column(type="string", length=150)
+     * @Assert\NotNull
      */
     private $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotNull
      */
     private $description;
 
     /**
      * @ORM\Column(type="string", length=30)
+     * @Assert\NotNull
      */
     private $status;
 
     /**
      * @ORM\Column(type="string", length=20)
+     * @Assert\NotNull
      */
     private $type;
 
     /**
      * @ORM\Column(type="integer")
+     * @Assert\NotNull
      */
     private $progression;
 

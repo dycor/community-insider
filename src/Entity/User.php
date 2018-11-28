@@ -4,6 +4,11 @@ namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use App\Entity\Traits\TimestampableTrait;
+use App\Entity\Traits\SoftDeletedTrait;
+use App\Entity\Traits\SortablePositionTrait;
+use App\Entity\Traits\PublishedTrait;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
@@ -11,6 +16,10 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class User implements UserInterface
 {
+    use TimestampableTrait;
+    use SoftDeletedTrait;
+    use SortablePositionTrait;
+    use PublishedTrait;
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -20,7 +29,11 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
+     * @Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email.",
+     * )
      */
+
     private $email;
 
     /**
@@ -31,6 +44,7 @@ class User implements UserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Regex("/^(?=.*[a-z])(?=.*\d).{6,}$/i")
      */
     private $password;
 

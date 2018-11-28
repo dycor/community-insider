@@ -20,6 +20,7 @@ class SecurityController extends Controller
      */
     public function login(AuthenticationUtils $helper): Response
     {
+
         return $this->render('Front/Security/login.html.twig', [
             'error' => $helper->getLastAuthenticationError(),
         ]);
